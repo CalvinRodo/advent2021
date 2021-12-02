@@ -1,10 +1,13 @@
 #!/bin/bash
 
 DAY=$1
+P1=$1_part1
+P2=$1_part2
 
 mkdir -p "$DAY"
 
-touch "$DAY/$DAY.rs"
+touch "$DAY/$P1.rs"
+touch "$DAY/$P2.rs"
 
 cat << EOF > "$DAY/Makefile"
 
@@ -13,21 +16,22 @@ cat << EOF > "$DAY/Makefile"
 all: fmt clean build
 
 build:
-	@echo building...$DAY.rs
-	@rustc $DAY.rs
+	@echo building...$DAY
+	@rustc $P1.rs
+	@rustc $P2.rs
 
 clean:
 	@echo cleaning...
-	@rm $DAY
+	@rm -f $P1 $P2
 
 fmt:
 	@echo "Formatting..."
-	@rustfmt $DAY.rs
+	@rustfmt $P1.rs $P2.rs
 
 fmt-ci:
 	@echo "Formatting..."
-	@rustfmt --check $DAY.rs
+	@rustfmt --check $P1.rs $P2.rs
 
 EOF
 
-printf "%s\n" "$DAY1" >> .modules
+printf "%s\n" "$DAY" >> .modules

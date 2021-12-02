@@ -10,7 +10,7 @@ build:
 
 clean:
 	@echo cleaning...
-	@rm day1
+	@rm -f day1
 
 fmt:
 	@echo "Formatting..."
