@@ -34,11 +34,11 @@ fn split_lines(s: &str) -> Vec<(&str, i32)> {
         .collect();
 }
 
-fn add_direction(direction: &str, val: i32, depth: i32, horiz: i32) -> (i32, i32) {
+fn add_direction(direction: &str, val: i32, depth: i32, horiz: i32, aim: i32) -> (i32, i32, i32) {
     match direction {
-        "up" => (horiz, depth + val),
-        "down" => (horiz, depth - val),
-        "forward" => (horiz + val, depth),
+        "up" => (horiz, depth, aim - val),
+        "down" => (horiz, depth, aim + val),
+        "forward" => (horiz + val, depth + (aim * val), aim),
         _ => panic!("unknown direction"),
     }
 }
@@ -49,11 +49,13 @@ fn main() {
 
     let mut horiz = 0;
     let mut depth = 0;
+    let mut aim = 0;
 
     d.iter().for_each(|(direction, val)| {
-        let (h, d) = add_direction(direction, *val, depth, horiz);
+        let (h, d, a) = add_direction(direction, *val, depth, horiz, aim);
         horiz = h;
         depth = d;
+        aim = a;
     });
 
     println!("{}", horiz.abs() * depth.abs());
