@@ -22,17 +22,17 @@ fn read_to_string(filename: &str) -> String {
     return s;
 }
 
-fn build_strings_from_common_chars(a: Vec<[u32;2]>) -> (String, String) {
+fn build_strings_from_common_chars(a: Vec<[u32; 2]>) -> (String, String) {
     let mut s1 = String::new();
     let mut s2 = String::new();
     for i in 0..a.len() {
-      if a[i][0] > a[i][1] {
-        s1.push('0');
-        s2.push('1');
-      } else {
-        s1.push('1');
-        s2.push('0');
-      }
+        if a[i][0] > a[i][1] {
+            s1.push('0');
+            s2.push('1');
+        } else {
+            s1.push('1');
+            s2.push('0');
+        }
     }
     return (s1, s2);
 }
@@ -61,5 +61,4 @@ fn main() {
 
     println!("i1: {}, i2: {}", i1, i2);
     println!("answer {}", i1 * i2);
-
 }
